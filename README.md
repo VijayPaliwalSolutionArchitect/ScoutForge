@@ -1,5 +1,7 @@
 # ScoutForge — AI Candidate Sourcing & Hiring-Funnel Analytics
 
+> Version: v0.1 · 15-11-26 · Author: SHIVAM ITCS (JARVIS)
+
 **ScoutForge** is a self-contained, AI-flavoured talent-acquisition platform:
 post job openings, source and score candidates with a **deterministic, auditable
 skill-match model**, move candidates through a hiring funnel, and watch funnel /
@@ -133,11 +135,23 @@ fit so hiring teams can see exactly *why* a score is what it is.
 ## Documentation
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — layered architecture, schema, data flow (text + Mermaid).
-- [`docs/TECH-STACK.md`](docs/TECH-STACK.md) — components and versions with rationale.
-- [`docs/FEATURES.md`](docs/FEATURES.md) — feature-by-feature reference mapped to endpoints.
+- [`docs/INSTALLATION.md`](docs/INSTALLATION.md) — prerequisites, venv, dependencies, DB setup.
 - [`docs/RUNNING.md`](docs/RUNNING.md) — full install, run, seed and test guide.
-- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — production serving, env vars, backups.
+- [`docs/API.md`](docs/API.md) — every REST endpoint with request/response examples.
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — production serving, env vars, backups, platform VPS flow.
+- [`docs/FEATURES.md`](docs/FEATURES.md) — feature-by-feature reference mapped to endpoints.
+- [`docs/TECH-STACK.md`](docs/TECH-STACK.md) — components and versions with rationale.
 - [`docs/CODEBASE-ORGANIZATION.md`](docs/CODEBASE-ORGANIZATION.md) — per-module walkthrough and conventions.
+- [`docs/env-config.md`](docs/env-config.md) — all environment variables.
+- [`docs/PLAYBOOK-CROSSWALK.md`](docs/PLAYBOOK-CROSSWALK.md) — mapping to the portfolio playbook (Project 4).
+
+## Roadmap
+
+- LLM-assisted scoring as an opt-in layer behind the deterministic scorer (FR-S5 is local today).
+- PDF/CSV shortlist export (FR-S8).
+- Auth + RBAC/SSO (FR-S7) for multi-user deployments.
+- Postgres migration path for multi-writer deployments.
+- E-mail alerts / saved searches (MoSCoW "Could").
 
 ## Tech at a glance
 

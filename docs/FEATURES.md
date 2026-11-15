@@ -1,5 +1,7 @@
 # ScoutForge — Feature Reference
 
+> Version: v0.1 · 15-11-26 · Author: SHIVAM ITCS (JARVIS)
+
 Every feature below exists in the running code and is reachable through the API
 documents at `/docs` (and manifested in the dashboard served at `/`).
 

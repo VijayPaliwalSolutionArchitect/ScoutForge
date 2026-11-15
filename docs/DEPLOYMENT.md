@@ -1,4 +1,6 @@
-# ScoutForge — Deployment
+# ScoutForge — Deployment Guide
+
+> Version: v0.1 · 15-11-26 · Author: SHIVAM ITCS (JARVIS)
 
 ScoutForge is a single stateless-application process (all state lives in one
 SQLite file), which makes deployment unusually simple: run uvicorn, point a
@@ -141,3 +143,43 @@ Everything important is in one file, so backup is trivial:
 - [ ] Automated DB backup.
 - [ ] Health-check monitor on `/api/health`.
 - [ ] `SCOUTFORGE_DB` set to a writable, *persistent* path in production.
+
+## Platform VPS deployment (playbook flow: Coolify + Caddy + Uptime Kuma)
+
+> Version: v0.1 · 15-11-26 · Author: SHIVAM ITCS (JARVIS)
+
+Hero-project deployment on the shared VPS platform, following the portfolio
+playbook's standard flow (§3.7 “Deployment on the VPS and the live demo”):
+
+1. **Coolify** — add this repo as a service resource (or Compose) in Coolify.
+   Use the Dockerfile above with `ENV SCOUTFORGE_DB=/data/scoutforge.db` and a
+   **persistent volume mounted at `/data`**. Coolify handles build, deploy and
+   restart-on-push.
+2. **Caddy site** — create the site `scout.shivamitcs.com` in Caddy routing to
+   the container's port `8000`. Caddy provisions **automatic HTTPS**
+   (Let's Encrypt); verify TLS and that the dashboard loads over
+   `https://scout.shivamitcs.com/`.
+3. **Acceptance smoke test** — from the VPS:
+   ```bash
+   curl -s https://scout.shivamitcs.com/api/health        # {"status":"ok",...}
+   curl -s -X POST https://scout.shivamitcs.com/api/jobs -H 'Content-Type: application/json' \
+     -d '{"title":"Smoke","required_skills":["python"],"seniority":"mid"}'
+   curl -s "https://scout.shivamitcs.com/api/jobs/1/shortlist?k=3"
+   ```
+4. **Monitoring** — Uptime Kuma HTTP monitor on
+   `https://scout.shivamitcs.com/api/health`, 60 s interval, alert on non-200 /
+   timeout.
+5. **Backups** — nightly timer (systemd timer or Coolify cron) running:
+   ```bash
+   sqlite3 /data/scoutforge.db ".backup '/backups/scoutforge-$(date +%F).db'"
+   ```
+   Retain 30 days. Run **one timed restore drill**: restore a backup to a temp
+   file, boot a throwaway instance with `SCOUTFORGE_DB=<temp file>`, confirm
+   `GET /api/jobs` returns the restored rows, record the elapsed time.
+6. **Rollout** — push to the repo → Coolify rebuilds and redeploys. Schema init
+   is idempotent and seeding runs only when the DB is empty, so redeploys and
+   restores never clobber existing data.
+
+No external AI service is called at runtime (scoring is local), so no API keys
+are needed on the VPS — if keys are ever introduced, keep them in Coolify's
+env settings only and redact them from docs (`[REDACTED]`).

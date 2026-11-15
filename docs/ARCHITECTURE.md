@@ -1,5 +1,7 @@
 # ScoutForge — Architecture
 
+> Version: v0.1 · 15-11-26 · Author: SHIVAM ITCS (JARVIS)
+
 This document describes how the running system is built, as implemented in the
 source tree. ScoutForge is intentionally **small and self-contained**: one Python
 process (FastAPI), one SQLite file, and a zero-build browser dashboard. There is

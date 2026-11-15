@@ -1,5 +1,7 @@
 # ScoutForge — Technology Stack
 
+> Version: v0.1 · 15-11-26 · Author: SHIVAM ITCS (JARVIS)
+
 Verified against the installed environment in `backend/.venv` at the time of
 writing.
 

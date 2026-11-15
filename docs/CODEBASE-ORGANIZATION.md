@@ -1,5 +1,7 @@
 # ScoutForge — Codebase Organization
 
+> Version: v0.1 · 15-11-26 · Author: SHIVAM ITCS (JARVIS)
+
 A map of every meaningful file, its responsibility, and the conventions the
 code follows. Read this before editing.
 

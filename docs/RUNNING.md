@@ -1,5 +1,7 @@
 # ScoutForge — Running, Seeding & Testing
 
+> Version: v0.1 · 15-11-26 · Author: SHIVAM ITCS (JARVIS)
+
 Practical, verified instructions for getting the app up, refreshing sample data,
 and running the test suite. All commands assume you start from the repo root
 (`ScoutForge/`) unless noted.
