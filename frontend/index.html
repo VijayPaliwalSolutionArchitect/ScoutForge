@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ScoutForge — AI Candidate Sourcing</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">SF</span>
+      <span class="brand-name">ScoutForge</span>
+    </div>
+    <span class="health" id="health">connecting…</span>
+  </header>
+
+  <main class="layout">
+    <!-- ── Jobs ─────────────────────────────────────────────────── -->
+    <section class="panel" id="panel-jobs">
+      <h2>Jobs</h2>
+      <form id="job-form" class="form">
+        <input type="text" id="job-title" placeholder="Title *" required />
+        <input type="text" id="job-location" placeholder="Location (e.g. Remote)" value="Remote" />
+        <input type="text" id="job-skills" placeholder="Required skills, comma separated *" required />
+        <div class="row">
+          <select id="job-seniority">
+            <option value="junior">junior</option>
+            <option value="mid" selected>mid</option>
+            <option value="senior">senior</option>
+            <option value="lead">lead</option>
+          </select>
+          <input type="number" id="job-sal-min" placeholder="Salary min" min="0" />
+          <input type="number" id="job-sal-max" placeholder="Salary max" min="0" />
+        </div>
+        <textarea id="job-desc" placeholder="Job description (optional)"></textarea>
+        <button type="submit" class="primary">Post job</button>
+      </form>
+
+      <h3>Open jobs</h3>
+      <ul id="job-list" class="list"></ul>
+    </section>
+
+    <!-- ── Candidates + scoring ─────────────────────────────────── -->
+    <section class="panel" id="panel-candidates">
+      <h2>Candidates <span id="ctx-job" class="muted"></span></h2>
+      <form id="candidate-form" class="form">
+        <input type="text" id="cand-name" placeholder="Name *" required />
+        <input type="email" id="cand-email" placeholder="Email (optional)" />
+        <input type="text" id="cand-skills" placeholder="Skills, comma separated" />
+        <div class="row">
+          <input type="number" id="cand-exp" placeholder="Years exp" min="0" step="0.5" value="3" />
+          <select id="cand-source">
+            <option value="linkedin" selected>linkedin</option>
+            <option value="referral">referral</option>
+            <option value="jobboard">jobboard</option>
+            <option value="agency">agency</option>
+          </select>
+          <input type="number" id="cand-notice" placeholder="Notice (days)" min="0" value="30" />
+        </div>
+        <button type="submit" class="primary" id="cand-add-btn" disabled>Add candidate (select a job first)</button>
+      </form>
+
+      <h3>Pipeline</h3>
+      <ul id="candidate-list" class="list"></ul>
+    </section>
+
+    <!-- ── Shortlist + analytics ────────────────────────────────── -->
+    <div class="side">
+      <section class="panel">
+        <h2>AI Shortlist <span class="muted">top‑k by score</span></h2>
+        <ol id="shortlist" class="score-list"></ol>
+        <p class="muted empty" id="shortlist-empty">Select a job to rank its candidates.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Funnel analytics</h2>
+        <div id="funnel" class="funnel"></div>
+        <h3>Source effectiveness</h3>
+        <ul id="sources" class="sources"></ul>
+        <p class="stat">Offer acceptance rate: <strong id="offer-rate">—</strong></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

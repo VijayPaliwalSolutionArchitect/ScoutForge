@@ -1,0 +1,38 @@
+# ── Python ─────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Virtual environments ────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Runtime data (SQLite) ───────────────────────────────────────────────
+backend/*.db
+*.db
+*.db-shm
+*.db-wal
+
+# ── Environment / secrets ───────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+
+# ── Editors / OS ────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Node (if a bundled frontend appears later) ──────────────────────────
+node_modules/
+dist/
+build/

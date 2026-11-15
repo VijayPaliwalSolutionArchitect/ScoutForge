@@ -1,0 +1,1 @@
+"""ScoutForge test suite (pytest + FastAPI TestClient)."""
